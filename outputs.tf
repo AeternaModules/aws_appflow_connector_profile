@@ -16,7 +16,7 @@ output "appflow_connector_profiles_connector_label" {
 }
 output "appflow_connector_profiles_connector_profile_config" {
   description = "Map of connector_profile_config values across all appflow_connector_profiles, keyed the same as var.appflow_connector_profiles"
-  value       = { for k, v in aws_appflow_connector_profile.appflow_connector_profiles : k => v.connector_profile_config if v.connector_profile_config != null && length(v.connector_profile_config) > 0 }
+  value       = { for k, v in aws_appflow_connector_profile.appflow_connector_profiles : k => one(v.connector_profile_config) if v.connector_profile_config != null && length(v.connector_profile_config) > 0 }
   sensitive   = true
 }
 output "appflow_connector_profiles_connector_type" {
